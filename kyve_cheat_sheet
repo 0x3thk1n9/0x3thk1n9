@@ -1,0 +1,14 @@
+tee <<EOF > /dev/null /etc/systemd/system/*servicenamed*.service
+[Unit]
+Description=KYVE Protocol-Node *servicenamed* daemon
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=/$HOME/kyve/kysor start --valaccount *poolname*
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=infinity
+[Install]
+WantedBy=multi-user.target
+EOF
